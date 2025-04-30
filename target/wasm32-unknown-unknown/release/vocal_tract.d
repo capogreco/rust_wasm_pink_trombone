@@ -1,0 +1,1 @@
+/Users/capo_greco/Documents/wasm_audioWorklet_test/phase5/target/wasm32-unknown-unknown/release/vocal_tract.wasm: /Users/capo_greco/Documents/wasm_audioWorklet_test/phase5/src/glottis.rs /Users/capo_greco/Documents/wasm_audioWorklet_test/phase5/src/lib.rs /Users/capo_greco/Documents/wasm_audioWorklet_test/phase5/src/tract.rs

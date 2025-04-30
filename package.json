@@ -1,0 +1,17 @@
+{
+  "name": "vocal_tract",
+  "type": "module",
+  "collaborators": [
+    "Claude"
+  ],
+  "description": "Rust implementation of the Pink Trombone vocal tract model for WebAssembly",
+  "version": "0.1.0",
+  "files": [
+    "vocal_tract_bg.wasm",
+    "vocal_tract.js"
+  ],
+  "main": "vocal_tract.js",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
