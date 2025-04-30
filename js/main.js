@@ -69,7 +69,7 @@ class VocalTract {
                 document.getElementById('sampleRate').textContent = this.audioContext.sampleRate;
                 
                 // Add AudioWorklet module
-                await this.audioContext.audioWorklet.addModule('worklet-processor.js');
+                await this.audioContext.audioWorklet.addModule('js/worklet-processor.js');
                 
                 // Fetch WASM files - try both direct and wasm-bindgen approaches
                 let wasmBinary;
@@ -82,11 +82,11 @@ class VocalTract {
                     // Try loading wasm-bindgen JS module if it exists
                     try {
                         // Check which Rust-generated WASM files exist
-                        const checkBindgenWasm = await fetch('vocal_tract_bg.wasm', { method: 'HEAD' })
+                        const checkBindgenWasm = await fetch('wasm/vocal_tract_bg.wasm', { method: 'HEAD' })
                             .then(r => r.ok)
                             .catch(() => false);
                             
-                        const checkDirectWasm = await fetch('vocal_tract_direct.wasm', { method: 'HEAD' })
+                        const checkDirectWasm = await fetch('wasm/vocal_tract_direct.wasm', { method: 'HEAD' })
                             .then(r => r.ok)
                             .catch(() => false);
                             
@@ -97,7 +97,7 @@ class VocalTract {
                         
                         // Try loading direct WASM first - it's more reliable for AudioWorklet
                         if (checkDirectWasm) {
-                            const wasmResponse = await fetch('vocal_tract_direct.wasm');
+                            const wasmResponse = await fetch('wasm/vocal_tract_direct.wasm');
                             wasmBinary = await wasmResponse.arrayBuffer();
                             console.log("Direct Rust WASM binary loaded, size:", wasmBinary.byteLength);
                             // Skip wasm-bindgen setup
@@ -115,7 +115,7 @@ class VocalTract {
                                 console.log("Wasm-bindgen JS module loaded");
                                 
                                 // Load the corresponding wasm-bindgen WASM file
-                                const wasmResponse = await fetch('vocal_tract_bg.wasm');
+                                const wasmResponse = await fetch('wasm/vocal_tract_bg.wasm');
                                 wasmBinary = await wasmResponse.arrayBuffer();
                                 console.log("Wasm-bindgen WASM binary loaded, size:", wasmBinary.byteLength);
                             } catch (e) {
@@ -126,7 +126,7 @@ class VocalTract {
                         // Last resort - try the original file
                         if (!wasmBinary) {
                             try {
-                                const wasmResponse = await fetch('vocal_tract.wasm');
+                                const wasmResponse = await fetch('wasm/vocal_tract.wasm');
                                 wasmBinary = await wasmResponse.arrayBuffer();
                                 console.log("Original WASM binary loaded as last resort, size:", wasmBinary.byteLength);
                             } catch (e) {
